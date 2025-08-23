@@ -94,6 +94,28 @@
     <scope>runtime</scope>
 </dependency>
 
+<dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-junit5</artifactId>
+    <version>2.21.0</version>
+    <scope>test</scope>
+</dependency>
+
+<!-- Para gerar steps do RestAssured no relatório -->
+<dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-rest-assured</artifactId>
+    <version>2.21.0</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-rest-assured</artifactId>
+    <version>2.27.0</version>
+    <scope>test</scope>
+</dependency>
+
 	</dependencies>
 
 	<build>
@@ -122,6 +144,14 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-maven</artifactId>
+    <version>2.12.0</version>
+    <configuration>
+        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+    </configuration>
+</plugin>
 		</plugins>
 	</build>
 

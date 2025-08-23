@@ -2,16 +2,15 @@ package com.pedroviena.api_test_showcase;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName; // Importe o DisplayName
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
-// Importe as anotações do Allure
-import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -20,8 +19,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Feature("Criação de Usuários") // Nível mais alto de agrupamento
-public class UserApiTest {
+@Feature("Gerenciamento de Produtos")
+public class ProductApiTest {
 
     @LocalServerPort
     private int port;
@@ -33,15 +32,14 @@ public class UserApiTest {
     }
 
     @Test
-    @Story("Criar um novo usuário com dados válidos") // Agrupamento funcional
-    @Severity(SeverityLevel.CRITICAL) // Define a criticidade do teste
-    @DisplayName("Deve criar um usuário com sucesso") // Nome legível para o teste
-    @Description("Este teste verifica se a API consegue criar um novo usuário e retorna status 200.")
-    void shouldCreateUserSuccessfully() {
+    @Story("Criar um novo produto com dados válidos")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Deve criar um produto com sucesso")
+    void shouldCreateProductSuccessfully() {
         String json = """
                 {
-                  "name": "Pedro",
-                  "email": "pedro@test.com"
+                  "name": "Notebook Gamer",
+                  "price": 5999.90
                 }
                 """;
 
@@ -49,23 +47,23 @@ public class UserApiTest {
             .contentType(ContentType.JSON)
             .body(json)
         .when()
-            .post("/users")
+            .post("/products")
         .then()
             .statusCode(200)
             .body("id", notNullValue())
-            .body("name", equalTo("Pedro"))
-            .body("email", equalTo("pedro@test.com"));
+            .body("name", equalTo("Notebook Gamer"))
+            .body("price", is(5999.90F)); // Use is() e 'F' para float
     }
 
-    @Story("Tentar criar um usuário com dados inválidos")
+    @Test
+    @Story("Tentar criar um produto com dados inválidos")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Deve retornar erro 400 ao criar usuário com e-mail inválido")
-    @Description("Este teste verifica se a API retorna 'Bad Request' ao tentar criar um usuário com um formato de e-mail incorreto.")
-    void shouldReturnBadRequestWhenCreatingUserWithInvalidEmail() {
+    @DisplayName("Deve retornar erro 400 ao criar produto com preço zero")
+    void shouldReturnBadRequestWhenCreatingProductWithInvalidPrice() {
         String json = """
                 {
-                  "name": "Maria",
-                  "email": "maria-email-invalido"
+                  "name": "Teclado",
+                  "price": 0
                 }
                 """;
 
@@ -73,9 +71,8 @@ public class UserApiTest {
             .contentType(ContentType.JSON)
             .body(json)
         .when()
-            .post("/users")
+            .post("/products")
         .then()
-            .statusCode(400); // A validação deve falhar e retornar 400
+            .statusCode(400); // A validação @Min(1) deve falhar
     }
-
 }

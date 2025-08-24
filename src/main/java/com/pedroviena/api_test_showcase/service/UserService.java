@@ -20,11 +20,10 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User findById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-    }
-
+public User findById(Long id) {
+    return repository.findById(id)
+            .orElseThrow(() -> new com.pedroviena.api_test_showcase.exception.ResourceNotFoundException("Usuário não encontrado com o ID: " + id));
+}
     public User save(User user) {
         return repository.save(user);
     }
@@ -32,4 +31,6 @@ public class UserService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    
 }

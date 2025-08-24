@@ -3,6 +3,7 @@ package com.pedroviena.api_test_showcase.service;
 import com.pedroviena.api_test_showcase.model.Product;
 import com.pedroviena.api_test_showcase.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import com.pedroviena.api_test_showcase.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ProductService {
 
     public Product findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com o ID: " + id));
     }
 
     public Product save(Product product) {

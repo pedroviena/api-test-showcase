@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc; // 3. Importe o MockMvc
 
 import com.pedroviena.api_test_showcase.controller.UserController;
 import com.pedroviena.api_test_showcase.model.User;
-import com.pedroviena.api_test_showcase.repository.UserRepository;
+import com.pedroviena.api_test_showcase.service.UserService;
 
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junitsupport.Provider;
@@ -31,14 +31,14 @@ public class UserProviderContractTest extends AbstractIntegrationTest {
     private MockMvc mockMvc; // 6. Injete o MockMvc
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @BeforeEach
     void setUp(PactVerificationContext context) {
         if (context != null) {
            
             MockMvcTestTarget target = new MockMvcTestTarget();
-            target.setControllers(new UserController(userRepository)); 
+            target.setControllers(new UserController(userService));
             context.setTarget(target);
         }
     }
@@ -52,7 +52,7 @@ public class UserProviderContractTest extends AbstractIntegrationTest {
     @State("um usuário com ID 1 existe")
     public void userExistsState() {
         
-        userRepository.deleteAll(); 
-        userRepository.save(new User(1L, "Ana Silva", "ana.silva@example.com"));
+    userService.delete(1L);
+    userService.save(new User(1L, "Ana Silva", "ana.silva@example.com"));
     }
 }

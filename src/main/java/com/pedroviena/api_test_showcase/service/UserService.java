@@ -1,3 +1,4 @@
+
 package com.pedroviena.api_test_showcase.service;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public class UserService {
 
     public UserService(UserRepository repository) {
         this.repository = repository;
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
     }
 
     public List<User> findAll() {

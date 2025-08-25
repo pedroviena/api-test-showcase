@@ -52,7 +52,10 @@ public class UserProviderContractTest extends AbstractIntegrationTest {
     @State("um usuário com ID 1 existe")
     public void userExistsState() {
         
-    userService.delete(1L);
-    userService.save(new User(1L, "Ana Silva", "ana.silva@example.com"));
+    userService.deleteAll();
+    User user = new User();
+    user.setName("Ana Silva");
+    user.setEmail("ana.silva@example.com");
+    userService.save(user);
     }
 }

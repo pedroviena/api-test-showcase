@@ -1,0 +1,1 @@
+{"uuid":"20eb6797-711b-486e-924b-9e5add3a4814","name":"Deve retornar erro 400 ao criar produto com preço inválido","children":["ce2549cc-d055-4625-badc-f6ce1684410e"],"befores":[],"afters":[],"start":1756094342287,"stop":1756094342359}

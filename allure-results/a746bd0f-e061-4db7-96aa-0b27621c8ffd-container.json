@@ -1,0 +1,1 @@
+{"uuid":"a746bd0f-e061-4db7-96aa-0b27621c8ffd","name":"Deve retornar erro 400 ao criar usuário com e-mail inválido","children":["fc4e9f81-ebfa-47f1-a596-63b250c3bb71"],"befores":[],"afters":[],"start":1756094343042,"stop":1756094343146}

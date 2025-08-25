@@ -1,40 +1,44 @@
 package com.pedroviena.api_test_showcase;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestTemplate;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
-import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
 import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
 import au.com.dius.pact.provider.spring.junit5.PactVerificationSpringExtension;
+import com.pedroviena.api_test_showcase.model.User;
+import com.pedroviena.api_test_showcase.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestTemplate;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Provider("UserApiProvider")
-@PactFolder("target/pacts")
-class UserProviderContractTest {
+
+public class UserProviderContractTest extends AbstractIntegrationTest {
 
     @LocalServerPort
     private int port;
 
+    @Autowired
+    private UserRepository userRepository; 
+
     @BeforeEach
     void setUp(PactVerificationContext context) {
-        context.setTarget(new HttpTestTarget("localhost", port));
+        if (context != null) {
+            context.setTarget(new HttpTestTarget("localhost", port));
+        }
     }
 
     @TestTemplate
-    @ExtendWith(PactVerificationInvocationContextProvider.class)
+    @ExtendWith(PactVerificationSpringExtension.class) 
     void pactVerificationTestTemplate(PactVerificationContext context) {
         context.verifyInteraction();
     }
 
     @State("um usuário com ID 1 existe")
-    void userExistsState() {
-        System.out.println("Estado preparado: usuário com ID 1 existe.");
+    public void userExistsState() {
+        
+        userRepository.save(new User(1L, "Ana Silva", "ana.silva@example.com", "senha"));
     }
 }

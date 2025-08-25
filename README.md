@@ -67,6 +67,10 @@ A API de exemplo, desenvolvida com Spring Boot, gerencia um CRUD simples de usu�
     ```
 
 ### Visualizando os Relatórios Allure
+<img width="695" height="629" alt="allure-screenshot-api-pedroviena-project3" src="https://github.com/user-attachments/assets/67a2226b-50bb-4483-86c7-4a381ac6f406" />
+<img width="710" height="623" alt="allure-screenshot-api-pedroviena-project2" src="https://github.com/user-attachments/assets/730d2cdf-1fd5-4fd8-ae6a-8c293833485c" />
+<img width="1340" height="625" alt="allure-screenshot-api-pedroviena-project" src="https://github.com/user-attachments/assets/bf890162-7cdf-494a-a8ac-2d93bee61971" />
+<img width="716" height="619" alt="allure-screenshot-api-pedroviena-project4" src="https://github.com/user-attachments/assets/d0934104-50ad-4da6-8dbf-ef1018d6c63d" />
 
 Após a execução dos testes, para visualizar o relatório HTML, execute o seguinte comando:
 

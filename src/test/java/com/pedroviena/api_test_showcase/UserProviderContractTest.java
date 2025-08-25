@@ -5,8 +5,11 @@ import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.junit.jupiter.SpringExtension; 
+
 import com.pedroviena.api_test_showcase.model.User;
 import com.pedroviena.api_test_showcase.repository.UserRepository;
+
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junitsupport.Provider;
@@ -14,9 +17,9 @@ import au.com.dius.pact.provider.junitsupport.State;
 import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
 import au.com.dius.pact.provider.spring.spring6.PactVerificationSpring6Provider;
 
-
 @Provider("UserApiProvider")
 @PactFolder("target/pacts")
+@ExtendWith(SpringExtension.class) 
 public class UserProviderContractTest extends AbstractIntegrationTest {
 
     @LocalServerPort
@@ -37,8 +40,10 @@ public class UserProviderContractTest extends AbstractIntegrationTest {
     void pactVerificationTestTemplate(PactVerificationContext context) {
         context.verifyInteraction();
     }
+
     @State("um usuário com ID 1 existe")
     public void userExistsState() {
+        userRepository.deleteAll(); 
         userRepository.save(new User(1L, "Ana Silva", "ana.silva@example.com"));
     }
 }

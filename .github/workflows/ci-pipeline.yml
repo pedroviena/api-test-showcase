@@ -1,38 +1,36 @@
-# Nome do seu workflow. Aparecerá na aba "Actions" do seu repositório no GitHub.
 name: Java CI with Maven
 
-# Define quando o workflow deve ser acionado.
+
 on:
-  # Aciona o workflow em pushes para a branch 'main' ou 'master'.
+  
   push:
     branches: [ "main", "master" ]
-  # Aciona também em Pull Requests direcionados para a branch 'main' ou 'master'.
+ 
   pull_request:
     branches: [ "main", "master" ]
 
-# Define os "jobs" (tarefas) que serão executados.
+
 jobs:
-  # Nome do job. Pode ser qualquer nome.
+  
   build_and_test:
-    # O tipo de máquina virtual que será usada para executar o job.
-    # 'ubuntu-latest' é uma escolha comum e econômica.
+
     runs-on: ubuntu-latest
 
-    # Define os passos que o job irá executar em sequência.
+
     steps:
-      # 1. Passo para baixar o código do seu repositório para a máquina virtual.
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Passo para configurar o ambiente Java (JDK).
+   
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin' # Uma distribuição popular e gratuita do OpenJDK.
-          cache: maven # Ativa o cache para as dependências do Maven, acelerando futuras execuções.
+          distribution: 'temurin' 
+          cache: maven 
 
-      # 3. Passo para rodar os testes com Maven.
+      
       - name: Build and run tests with Maven
-        # Este é o comando que você roda localmente. O pipeline vai fazer o mesmo.
+        
         run: mvn -B clean test

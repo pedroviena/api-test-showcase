@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 	<groupId>com.pedroviena</groupId>
 	<artifactId>api-test-showcase</artifactId>
@@ -73,21 +73,21 @@
         <scope>test</scope>
     </dependency>
 
-    <!-- JSONPath (para validar campos) -->
+   
     <dependency>
         <groupId>io.rest-assured</groupId>
         <artifactId>json-path</artifactId>
         <scope>test</scope>
     </dependency>
 
-<!-- Allure Reports -->
+
 <dependency>
     <groupId>io.qameta.allure</groupId>
     <artifactId>allure-junit5</artifactId>
     <version>2.27.0</version>
 </dependency>
 
-<!-- pom.xml -->
+
 <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
@@ -101,7 +101,7 @@
     <scope>test</scope>
 </dependency>
 
-<!-- Para gerar steps do RestAssured no relatório -->
+
 <dependency>
     <groupId>io.qameta.allure</groupId>
     <artifactId>allure-rest-assured</artifactId>
@@ -115,7 +115,58 @@
     <version>2.27.0</version>
     <scope>test</scope>
 </dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-testcontainers</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>au.com.dius.pact.provider</groupId>
+  <artifactId>junit5spring</artifactId>
+  <version>4.6.9</version>
+  <scope>test</scope>
+</dependency>
 
+
+<dependency>
+  <groupId>au.com.dius.pact.consumer</groupId>
+  <artifactId>junit5</artifactId>
+  <version>4.6.9</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.junit.platform</groupId>
+    <artifactId>junit-platform-suite</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.18.0</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit-platform-engine</artifactId>
+    <version>7.18.0</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-spring</artifactId>
+    <version>7.18.0</version>
+    <scope>test</scope>
+</dependency>
 	</dependencies>
 
 	<build>
